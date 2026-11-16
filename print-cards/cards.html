@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بطاقات نزار الفن · للطباعة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1f6feb; --blue-deep:#0b347a; --navy:#082a66;
+    --orange:#f59e0b; --orange-deep:#ef7d0a;
+    --ink:#0f1115; --muted:#5b6475;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{font-family:'Tajawal',sans-serif}
+  body{background:#e9edf3;padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:30px}
+  .screen-note{max-width:700px;text-align:center;color:#334;font-size:14px;line-height:1.7;
+    background:#fff;border:1px solid #dde3ec;border-radius:14px;padding:14px 18px}
+  .screen-note b{color:var(--blue-deep)}
+  .pair{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+  .tag{position:absolute;top:-22px;right:4px;font-size:12px;font-weight:700;color:#6b7687}
+
+  /* ---- CR80 card: trim 85.6 x 54mm + 3mm bleed = 91.6 x 60mm ---- */
+  .bleed{position:relative;width:91.6mm;height:60mm;overflow:hidden;border-radius:2mm;
+    box-shadow:0 12px 30px -12px rgba(8,42,102,.45)}
+  .trim{position:absolute;inset:3mm;border:.3mm dashed rgba(255,255,255,.55);
+    border-radius:1.4mm;pointer-events:none;z-index:40}
+  .safe{position:absolute;inset:7mm;z-index:20}
+  .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) .35mm,transparent .36mm);
+    background-size:3.4mm 3.4mm;opacity:.7;z-index:1}
+
+  /* ================= FRONT ================= */
+  .front{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 55%,var(--navy) 100%);color:#fff}
+  .front .glow{position:absolute;width:52mm;height:52mm;border-radius:50%;top:-24mm;left:-16mm;
+    background:radial-gradient(circle,rgba(245,158,11,.55),transparent 68%);filter:blur(2mm);z-index:1}
+  .front .wave{position:absolute;right:-6mm;bottom:-10mm;width:70mm;height:50mm;z-index:1;opacity:.14}
+  .front .ribbon{position:absolute;left:-6mm;bottom:-8mm;width:60mm;height:16mm;transform:rotate(-8deg);
+    background:linear-gradient(90deg,var(--orange),var(--orange-deep));z-index:1;opacity:.95;
+    box-shadow:0 2mm 6mm -2mm rgba(239,125,10,.6)}
+  .front .safe{display:flex;flex-direction:column;justify-content:space-between}
+  .logo-chip{width:33mm;height:22mm;background:#fff;border-radius:3mm;padding:2mm 3mm;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 3mm 8mm -3mm rgba(0,0,0,.45)}
+  .logo-chip img{max-width:100%;max-height:100%;object-fit:contain}
+  .nfc-pill{position:absolute;top:0;left:0;display:flex;align-items:center;gap:1.4mm;
+    background:rgba(255,255,255,.14);border:.25mm solid rgba(255,255,255,.35);
+    padding:1.3mm 2.6mm;border-radius:999px;font-size:2.5mm;font-weight:700;letter-spacing:.2px}
+  .nfc-pill svg{width:3.4mm;height:3.4mm}
+  .f-name{font-size:6mm;font-weight:900;line-height:1.12;text-shadow:0 1mm 3mm rgba(0,0,0,.28)}
+  .f-title{display:inline-block;margin-top:2mm;padding:1.3mm 3.4mm;border-radius:999px;font-size:3mm;font-weight:700;
+    background:linear-gradient(135deg,var(--orange),var(--orange-deep));box-shadow:0 2mm 5mm -2mm rgba(239,125,10,.7)}
+  .f-org{margin-top:2mm;font-size:3mm;font-weight:500;color:#dbe7ff;line-height:1.5;max-width:60mm}
+  .f-foot{display:flex;align-items:center;gap:2.4mm;flex-wrap:wrap}
+  .f-phone{display:flex;align-items:center;gap:1.6mm;font-size:3.3mm;font-weight:700;direction:ltr}
+  .f-phone svg{width:3.6mm;height:3.6mm;flex:none}
+  .f-web{display:flex;align-items:center;gap:1.4mm;font-size:2.7mm;font-weight:600;color:#cfe0ff;direction:ltr}
+  .f-web svg{width:3.2mm;height:3.2mm}
+
+  /* ================= BACK ================= */
+  .back{background:#ffffff;color:var(--ink)}
+  .back::before{content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(40mm 30mm at 8% -10%,#e8f0ff,transparent 70%),
+               radial-gradient(40mm 30mm at 100% 110%,#fff2dc,transparent 70%)}
+  .back .topbar{position:absolute;top:0;left:0;right:0;height:13mm;z-index:2;
+    background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 100%);
+    display:flex;align-items:center;justify-content:center;gap:2.4mm;color:#fff}
+  .topbar .mark{width:9mm;height:7mm;background:#fff;border-radius:1.6mm;padding:.6mm 1mm;display:flex;align-items:center;justify-content:center}
+  .topbar .mark img{max-width:100%;max-height:100%;object-fit:contain}
+  .topbar .t{font-size:3.2mm;font-weight:800}
+  .back .safe{top:13mm;left:0;right:0;bottom:6.5mm;padding:0 7mm;display:flex;align-items:center;gap:5mm}
+  .qr-card{flex:none;width:34mm;height:34mm;background:#fff;border-radius:3mm;padding:2mm;
+    box-shadow:0 3mm 9mm -3mm rgba(11,52,122,.45);border:.3mm solid #eef1f7}
+  .qr-card img{width:100%;height:100%;object-fit:contain;display:block}
+  .b-col{flex:1;display:flex;flex-direction:column;gap:2.4mm}
+  .b-scan{font-size:3.6mm;font-weight:900;color:var(--blue-deep)}
+  .b-scan span{color:var(--orange-deep)}
+  .b-hint{font-size:2.6mm;font-weight:500;color:var(--muted);line-height:1.5}
+  .nfc-box{display:flex;align-items:center;gap:2.6mm;padding:2mm 2.8mm;border-radius:2.4mm;
+    background:linear-gradient(135deg,#fff7ea,#ffedd0);border:.3mm solid #ffdfa6}
+  .nfc-box .ico{width:8.5mm;height:8.5mm;flex:none;color:var(--orange-deep)}
+  .nfc-box .ico svg{width:100%;height:100%}
+  .nfc-txt .a{font-size:3.2mm;font-weight:900;color:var(--ink);line-height:1.2}
+  .nfc-txt .b{font-size:2.4mm;font-weight:700;color:var(--orange-deep);letter-spacing:.5px;direction:ltr;text-align:right}
+  .b-contact{display:flex;flex-direction:column;gap:1.2mm;margin-top:.5mm}
+  .b-row{display:flex;align-items:center;gap:1.8mm;font-size:2.8mm;font-weight:700;color:var(--ink);direction:ltr;justify-content:flex-start}
+  .b-row svg{width:3.4mm;height:3.4mm;flex:none;color:var(--blue)}
+  .b-foot{position:absolute;bottom:2.4mm;left:0;right:0;text-align:center;font-size:2.2mm;color:#9aa3b4;z-index:3;direction:ltr}
+  .b-foot b{color:var(--blue-deep)}
+
+  @media print{
+    body{background:#fff;padding:0;gap:0;display:block}
+    .screen-note,.tag,.trim{display:none!important}
+    .pair{display:block;gap:0}
+    .bleed{border-radius:0;box-shadow:none;page-break-after:always;margin:0}
+    @page{size:91.6mm 60mm;margin:0}
+  }
+</style>
+</head>
+<body>
+  <div class="screen-note">
+    بطاقات <b>CR80</b> (مقاس بطاقة NFC القياسي ٨٥٫٦ × ٥٤ مم) — كل بطاقة بوجهين مع هامش قص (bleed) ٣ مم.<br>
+    للطباعة: <b>Ctrl+P ← Save as PDF ← Margins: None ← Scale 100%</b> — سيخرج كل وجه في صفحة مستقلة بمقاسه الصحيح.<br>
+    الخط المتقطّع = خط القص (يظهر على الشاشة فقط).
+  </div>
+
+  <!-- ===================== SHOP ===================== -->
+  <div class="pair">
+    <div class="bleed front" style="position:relative"><span class="tag">المتجر · وجه</span>
+      <div class="glow"></div>
+      <svg class="wave" viewBox="0 0 120 90" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M-5 60 C 25 20, 55 95, 90 45 S 135 15, 140 40"/></svg>
+      <div class="ribbon"></div>
+      <div class="dots"></div>
+      <div class="safe">
+        <div style="display:flex;justify-content:flex-start;position:relative">
+          <div class="nfc-pill"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M14 9a16 16 0 0 1 0 22"/><path d="M21 13a9.5 9.5 0 0 1 0 14"/><circle cx="27.5" cy="20" r="1.8" fill="#fff" stroke="none"/></svg>NFC</div>
+          <div class="logo-chip"><img src="../logo-v2.png" alt="Nizar Al-Fan"></div>
+        </div>
+        <div>
+          <div class="f-name">مطبعة نزار الفن</div>
+          <div class="f-title">للدعاية والإعلان والطباعة</div>
+        </div>
+        <div class="f-foot">
+          <div class="f-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 59 941 0841</div>
+          <div class="f-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bleed back"><span class="tag">المتجر · ظهر</span>
+      <div class="topbar"><div class="mark"><img src="../logo-v2.png" alt=""></div><div class="t">مطبعة نزار الفن</div></div>
+      <div class="safe">
+        <div class="qr-card"><img src="../qr/qr-shop-plain.png" alt="QR"></div>
+        <div class="b-col">
+          <div class="b-scan">امسح الكود <span>أو قرّب البطاقة</span></div>
+          <div class="nfc-box">
+            <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 8a18 18 0 0 1 0 24"/><path d="M19 11.5a11 11 0 0 1 0 17"/><path d="M26 15a4.5 4.5 0 0 1 0 10"/></svg></div>
+            <div class="nfc-txt"><div class="a">قرّب هاتفك من البطاقة</div><div class="b">TAP · NFC</div></div>
+          </div>
+          <div class="b-hint">بطاقة تواصل ذكية — احفظ جهة الاتصال، واتساب، الموقع والتقييم بلمسة واحدة.</div>
+        </div>
+      </div>
+      <div class="b-foot">nizar-alfan-cards.vercel.app · تصميم <b>CtrlZ</b></div>
+    </div>
+  </div>
+
+  <!-- ===================== MAHMOUD ===================== -->
+  <div class="pair">
+    <div class="bleed front"><span class="tag">محمود · وجه</span>
+      <div class="glow"></div>
+      <svg class="wave" viewBox="0 0 120 90" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M-5 60 C 25 20, 55 95, 90 45 S 135 15, 140 40"/></svg>
+      <div class="ribbon"></div>
+      <div class="dots"></div>
+      <div class="safe">
+        <div style="display:flex;justify-content:flex-start;position:relative">
+          <div class="nfc-pill"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M14 9a16 16 0 0 1 0 22"/><path d="M21 13a9.5 9.5 0 0 1 0 14"/><circle cx="27.5" cy="20" r="1.8" fill="#fff" stroke="none"/></svg>NFC</div>
+          <div class="logo-chip"><img src="../logo-v2.png" alt="Nizar Al-Fan"></div>
+        </div>
+        <div>
+          <div class="f-name">محمود أبو حسن</div>
+          <div class="f-org">مطبعة نزار الفن للدعاية والإعلان والطباعة</div>
+        </div>
+        <div class="f-foot">
+          <div class="f-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 53 290 8648</div>
+          <div class="f-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bleed back"><span class="tag">محمود · ظهر</span>
+      <div class="topbar"><div class="mark"><img src="../logo-v2.png" alt=""></div><div class="t">مطبعة نزار الفن</div></div>
+      <div class="safe">
+        <div class="qr-card"><img src="../qr/qr-mahmoud-plain.png" alt="QR"></div>
+        <div class="b-col">
+          <div class="b-scan">امسح الكود <span>أو قرّب البطاقة</span></div>
+          <div class="nfc-box">
+            <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 8a18 18 0 0 1 0 24"/><path d="M19 11.5a11 11 0 0 1 0 17"/><path d="M26 15a4.5 4.5 0 0 1 0 10"/></svg></div>
+            <div class="nfc-txt"><div class="a">قرّب هاتفك من البطاقة</div><div class="b">TAP · NFC</div></div>
+          </div>
+          <div class="b-hint">بطاقة تواصل ذكية — احفظ جهة الاتصال، واتساب، الموقع والتقييم بلمسة واحدة.</div>
+        </div>
+      </div>
+      <div class="b-foot">nizar-alfan-cards.vercel.app/mahmoud · تصميم <b>CtrlZ</b></div>
+    </div>
+  </div>
+
+  <!-- ===================== MOAFAQ ===================== -->
+  <div class="pair">
+    <div class="bleed front"><span class="tag">موفق · وجه</span>
+      <div class="glow"></div>
+      <svg class="wave" viewBox="0 0 120 90" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M-5 60 C 25 20, 55 95, 90 45 S 135 15, 140 40"/></svg>
+      <div class="ribbon"></div>
+      <div class="dots"></div>
+      <div class="safe">
+        <div style="display:flex;justify-content:flex-start;position:relative">
+          <div class="nfc-pill"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M14 9a16 16 0 0 1 0 22"/><path d="M21 13a9.5 9.5 0 0 1 0 14"/><circle cx="27.5" cy="20" r="1.8" fill="#fff" stroke="none"/></svg>NFC</div>
+          <div class="logo-chip"><img src="../logo-v2.png" alt="Nizar Al-Fan"></div>
+        </div>
+        <div>
+          <div class="f-name">موفق أبو البراء</div>
+          <div class="f-title">مسؤول التسويق</div>
+        </div>
+        <div class="f-foot">
+          <div class="f-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 53 352 8215</div>
+          <div class="f-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bleed back"><span class="tag">موفق · ظهر</span>
+      <div class="topbar"><div class="mark"><img src="../logo-v2.png" alt=""></div><div class="t">مطبعة نزار الفن</div></div>
+      <div class="safe">
+        <div class="qr-card"><img src="../qr/qr-moafaq-plain.png" alt="QR"></div>
+        <div class="b-col">
+          <div class="b-scan">امسح الكود <span>أو قرّب البطاقة</span></div>
+          <div class="nfc-box">
+            <div class="ico"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 8a18 18 0 0 1 0 24"/><path d="M19 11.5a11 11 0 0 1 0 17"/><path d="M26 15a4.5 4.5 0 0 1 0 10"/></svg></div>
+            <div class="nfc-txt"><div class="a">قرّب هاتفك من البطاقة</div><div class="b">TAP · NFC</div></div>
+          </div>
+          <div class="b-hint">بطاقة تواصل ذكية — احفظ جهة الاتصال، واتساب، الموقع والتقييم بلمسة واحدة.</div>
+        </div>
+      </div>
+      <div class="b-foot">nizar-alfan-cards.vercel.app/moafaq · تصميم <b>CtrlZ</b></div>
+    </div>
+  </div>
+</body>
+</html>
