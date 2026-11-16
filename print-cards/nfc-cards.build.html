@@ -28,32 +28,32 @@
 
   /* ================= FRONT ================= */
   .front{background:#fff;color:var(--ink)}
-  .front .edge{position:absolute;top:0;bottom:0;right:0;width:7mm;background:var(--navy);z-index:3}
-  .front .edge-o{position:absolute;right:0;top:33mm;width:9mm;height:15mm;background:var(--orange);z-index:4;
-    clip-path:polygon(0 12%,100% 0,100% 100%,0 88%)}
-  .front .safe{position:absolute;top:7mm;bottom:7mm;left:9mm;right:11mm;z-index:10;
-    display:flex;flex-direction:column;justify-content:space-between}
-  .f-top{direction:ltr;display:flex;align-items:center;justify-content:space-between}
-  .nfc-pill{display:inline-flex;align-items:center;gap:1.4mm;background:#f6f8fc;border:.3mm solid #dfe5ef;
-    padding:1.3mm 2.8mm;border-radius:999px;font-weight:800;font-size:2.7mm;color:var(--navy);letter-spacing:.3px}
-  .nfc-pill svg{width:3.4mm;height:3.4mm;color:var(--navy)}
+  /* soft logo watermark bleeding off the right edge */
+  .front .f-bg{position:absolute;top:50%;right:-17mm;transform:translateY(-50%);
+    height:86mm;width:auto;opacity:.06;z-index:1;pointer-events:none}
+  /* subtle navy foot band tying front to the navy back */
+  .front .f-band{position:absolute;left:0;right:0;bottom:0;height:12mm;background:var(--navy);z-index:2}
+  .front .safe{position:absolute;top:7mm;bottom:0;left:8mm;right:8mm;z-index:10;
+    display:flex;flex-direction:column}
+  .f-top{direction:ltr;display:flex;align-items:flex-start;justify-content:space-between}
+  .nfc-pill{display:inline-flex;align-items:center;gap:1.2mm;background:#f5f7fb;border:.3mm solid #e4e9f1;
+    padding:1.2mm 2.6mm;border-radius:999px;font-weight:800;font-size:2.4mm;color:#5a6980;letter-spacing:.4px}
+  .nfc-pill svg{width:3.1mm;height:3.1mm;color:var(--orange)}
   .wm{display:flex;align-items:center;gap:2mm}
   .wm-txt{text-align:right;line-height:1}
-  .wm-name{font-family:'Poppins',sans-serif;font-weight:800;font-size:4.3mm;letter-spacing:.2px}
+  .wm-name{font-family:'Poppins',sans-serif;font-weight:800;font-size:4.2mm;letter-spacing:.2px}
   .wm-name .n{color:var(--wm-blue)}.wm-name .a{color:var(--orange)}
-  .wm-sub{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.7mm;letter-spacing:2.6px;color:#8a93a3;margin-top:.6mm}
-  .wm .mark{height:9mm;width:auto}
-  .f-mid{text-align:right}
-  .f-name{font-size:6.2mm;font-weight:900;color:var(--navy);line-height:1.15}
-  .f-role{margin-top:2mm;font-size:3mm;font-weight:700;color:#44506a;display:flex;align-items:center;justify-content:flex-end;gap:1.6mm}
-  .f-role .dot{width:1.6mm;height:1.6mm;border-radius:50%;background:var(--orange);flex:none}
-  .f-bottom{}
-  .f-div{height:.3mm;background:var(--line);margin-bottom:2.6mm}
-  .f-contact{direction:ltr;display:flex;align-items:center;justify-content:space-between}
-  .f-item{display:flex;align-items:center;gap:1.8mm;font-size:3mm;font-weight:700;color:var(--ink)}
-  .f-item.web{color:var(--blue)}
-  .f-item svg{width:3.6mm;height:3.6mm;flex:none}
-  .f-item.phone svg{color:var(--orange)} .f-item.web svg{color:var(--blue)}
+  .wm-sub{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.65mm;letter-spacing:2.5px;color:#9aa4b4;margin-top:.7mm}
+  .wm .mark{height:9.5mm;width:auto}
+  .f-mid{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:right;padding-bottom:12mm}
+  .f-name{font-size:6.8mm;font-weight:900;color:var(--navy);line-height:1.08;letter-spacing:-.2px}
+  .f-accent{width:15mm;height:1.1mm;background:var(--orange);border-radius:1mm;margin:2.6mm 0 2.6mm auto}
+  .f-role{font-size:3mm;font-weight:600;color:#6b7686}
+  .f-contact{position:absolute;left:8mm;right:8mm;bottom:3.4mm;z-index:11;direction:ltr;
+    display:flex;align-items:center;justify-content:space-between}
+  .f-item{display:flex;align-items:center;gap:1.8mm;font-size:3mm;font-weight:700;color:#fff}
+  .f-item svg{width:3.6mm;height:3.6mm;flex:none;color:var(--orange)}
+  .f-sep{width:.3mm;height:4.4mm;background:rgba(255,255,255,.22)}
 
   /* ================= BACK ================= */
   .back{background:var(--navy);color:#fff}
@@ -105,7 +105,9 @@
   <!-- ===== SHOP ===== -->
   <div class="pair">
     <div class="bleed front"><span class="tag">المتجر · وجه</span>
-      <div class="otop"></div><div class="edge"></div><div class="edge-o"></div>
+      <div class="otop"></div>
+      <img class="f-bg" src="assets/mark-navy.png" alt="">
+      <div class="f-band"></div>
       <div class="safe">
         <div class="f-top">
           <div class="nfc-pill"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 9a16 16 0 0 1 0 22"/><path d="M19 13a9.5 9.5 0 0 1 0 14"/><circle cx="25.5" cy="20" r="1.8" fill="currentColor" stroke="none"/></svg>NFC</div>
@@ -113,15 +115,14 @@
         </div>
         <div class="f-mid">
           <div class="f-name">مطبعة نزار الفن</div>
-          <div class="f-role"><span class="dot"></span>للدعاية والإعلان والطباعة</div>
+          <div class="f-accent"></div>
+          <div class="f-role">للدعاية والإعلان والطباعة</div>
         </div>
-        <div class="f-bottom">
-          <div class="f-div"></div>
-          <div class="f-contact">
-            <div class="f-item phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 59 941 0841</div>
-            <div class="f-item web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
-          </div>
-        </div>
+      </div>
+      <div class="f-contact">
+        <div class="f-item phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 59 941 0841</div>
+        <div class="f-sep"></div>
+        <div class="f-item web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
       </div>
     </div>
 
@@ -850,7 +851,9 @@
   <!-- ===== MAHMOUD ===== -->
   <div class="pair">
     <div class="bleed front"><span class="tag">محمود · وجه</span>
-      <div class="otop"></div><div class="edge"></div><div class="edge-o"></div>
+      <div class="otop"></div>
+      <img class="f-bg" src="assets/mark-navy.png" alt="">
+      <div class="f-band"></div>
       <div class="safe">
         <div class="f-top">
           <div class="nfc-pill"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 9a16 16 0 0 1 0 22"/><path d="M19 13a9.5 9.5 0 0 1 0 14"/><circle cx="25.5" cy="20" r="1.8" fill="currentColor" stroke="none"/></svg>NFC</div>
@@ -858,15 +861,14 @@
         </div>
         <div class="f-mid">
           <div class="f-name">محمود أبو حسن</div>
-          <div class="f-role"><span class="dot"></span>مطبعة نزار الفن للدعاية والإعلان والطباعة</div>
+          <div class="f-accent"></div>
+          <div class="f-role">مطبعة نزار الفن للدعاية والإعلان والطباعة</div>
         </div>
-        <div class="f-bottom">
-          <div class="f-div"></div>
-          <div class="f-contact">
-            <div class="f-item phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 53 290 8648</div>
-            <div class="f-item web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
-          </div>
-        </div>
+      </div>
+      <div class="f-contact">
+        <div class="f-item phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 53 290 8648</div>
+        <div class="f-sep"></div>
+        <div class="f-item web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
       </div>
     </div>
 
@@ -1587,7 +1589,9 @@
   <!-- ===== MOAFAQ ===== -->
   <div class="pair">
     <div class="bleed front"><span class="tag">موفق · وجه</span>
-      <div class="otop"></div><div class="edge"></div><div class="edge-o"></div>
+      <div class="otop"></div>
+      <img class="f-bg" src="assets/mark-navy.png" alt="">
+      <div class="f-band"></div>
       <div class="safe">
         <div class="f-top">
           <div class="nfc-pill"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 9a16 16 0 0 1 0 22"/><path d="M19 13a9.5 9.5 0 0 1 0 14"/><circle cx="25.5" cy="20" r="1.8" fill="currentColor" stroke="none"/></svg>NFC</div>
@@ -1595,15 +1599,14 @@
         </div>
         <div class="f-mid">
           <div class="f-name">موفق أبو البراء</div>
-          <div class="f-role"><span class="dot"></span>مسؤول التسويق · مطبعة نزار الفن</div>
+          <div class="f-accent"></div>
+          <div class="f-role">مسؤول التسويق · مطبعة نزار الفن</div>
         </div>
-        <div class="f-bottom">
-          <div class="f-div"></div>
-          <div class="f-contact">
-            <div class="f-item phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 53 352 8215</div>
-            <div class="f-item web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
-          </div>
-        </div>
+      </div>
+      <div class="f-contact">
+        <div class="f-item phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+966 53 352 8215</div>
+        <div class="f-sep"></div>
+        <div class="f-item web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>nizaralfan.com</div>
       </div>
     </div>
 
