@@ -1,28 +1,33 @@
-# بطاقات نزار الفن — تصاميم الطباعة (NFC)
+# Nizar Al-Fan — NFC Smart Business Cards (print)
 
-تصاميم البطاقات الفعلية للطباعة على بطاقات NFC — ٣ أشخاص، وجهان لكل بطاقة، مع كود QR وشعار "اللمس الذكي / NFC".
+بطاقات NFC الفعلية للطباعة — ٣ أشخاص، وجهان لكل بطاقة، مع كود QR **متجهي (vector)** وشعار اللمس الذكي / NFC.
 
-## الملفات
-- **`cards.html`** — المصدر القابل للتعديل (كل البيانات والألوان هنا).
-- **`nizar-alfan-cards-print.pdf`** — ملف جاهز للطباعة، ٦ صفحات (وجه لكل صفحة).
-- **`preview/final.png`** — معاينة لكل البطاقات.
+## الملف الجاهز للطباعة
+- **`Nizar Al-Fan NFC Smart Business Cards.pdf`** — ٦ صفحات (وجه لكل صفحة)، PDF **متجهي**:
+  - كود QR = vector (مُولّد بـ qrencode، مستوى تصحيح H) ومُتحقّق من مسحه لكل بطاقة.
+  - النصوص = خطوط مضمّنة (TrueType) متجهية.
+  - الوحيد غير المتجه: شعار الحرف N (PNG صغير `assets/mark.png`) — بدقة عالية كافية للطباعة.
+
+## المصدر
+- **`nfc-cards.html`** — القالب القابل للتعديل (كل النصوص/الألوان هنا)، فيه رموز `@@QR_*@@`.
+- **`build.py`** — يحقن كود QR المتجهي داخل القالب وينتج `nfc-cards.build.html`.
+- **`assets/qr-*.svg`** — أكواد QR المتجهية. **`assets/mark.png`** — شعار الحرف N.
+- **`preview/all-cards.png`** — معاينة.
 
 ## المقاس
-- القصّ النهائي (trim): **٨٥٫٦ × ٥٤ مم** — مقاس بطاقة NFC / البطاقة البنكية القياسي (CR80).
-- مع هامش قصّ (bleed): **٩١٫٦ × ٦٠ مم**.
-- المنطقة الآمنة للنصوص: ٤ مم داخل خط القصّ.
+- القصّ النهائي: **٨٥٫٦ × ٥٤ مم** (CR80 — مقاس بطاقة NFC القياسي).
+- مع هامش القصّ (bleed): **٩١٫٦ × ٦٠ مم**.
 
-## الترتيب (٦ صفحات)
-1. المتجر — وجه  2. المتجر — ظهر
-3. محمود — وجه  4. محمود — ظهر
-5. موفق — وجه  6. موفق — ظهر
-
-## إعادة توليد الـ PDF بعد أي تعديل
+## إعادة التوليد بعد أي تعديل
 ```bash
-google-chrome-stable --headless=new --disable-gpu \
-  --print-to-pdf=nizar-alfan-cards-print.pdf --no-pdf-header-footer \
-  "file://$PWD/cards.html"
+cd print-cards
+python3 build.py
+google-chrome-stable --headless=new --disable-gpu --no-sandbox \
+  --print-to-pdf="Nizar Al-Fan NFC Smart Business Cards.pdf" --no-pdf-header-footer \
+  "file://$PWD/nfc-cards.build.html"
 ```
-أو افتح `cards.html` في المتصفح ثم: **Ctrl+P ← Save as PDF ← Margins: None ← Scale 100%**.
 
-> الكودات المستخدمة: `qr/qr-*-plain.png` (كود QR أزرق بشعار في الوسط). الشعار: `logo-v2.png`.
+## الروابط داخل أكواد QR (مُتحقّق منها)
+- المتجر → `https://nizar-alfan-cards.vercel.app/`
+- محمود → `https://nizar-alfan-cards.vercel.app/mahmoud`
+- موفق → `https://nizar-alfan-cards.vercel.app/moafaq`
